@@ -40,11 +40,6 @@ export class AddPostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // if (this.postForm.valid) {
-    //   this.postService.addPost(this.postForm.value);
-    //   this.postForm.reset();
-    //   this.router.navigate(['/posts']); // Navigate to the post list
-    // }
     if (this.postForm.valid) {
       const postData: Post = { id: this.postId ?? 0, ...this.postForm.value };
 

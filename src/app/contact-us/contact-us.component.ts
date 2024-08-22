@@ -13,8 +13,6 @@ export class ContactUsComponent {
   constructor() {}
 
   onSubmit() {
-    // Open success dialog
-
     // Reset form fields
     this.name = '';
     this.email = '';
