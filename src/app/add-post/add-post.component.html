@@ -18,6 +18,16 @@
           ></textarea>
         </mat-form-field>
 
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" required>
+            <mat-option value="IT">IT</mat-option>
+            <mat-option value="Social">Social</mat-option>
+            <mat-option value="Marketing">Marketing</mat-option>
+            <mat-option value="News">News</mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <div class="button-container">
           <button mat-raised-button color="primary" type="submit">
             Add Post

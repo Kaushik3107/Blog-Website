@@ -19,6 +19,7 @@ export class AddPostComponent implements OnInit {
     this.postForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+      category: ['', Validators.required], // New category field
     });
   }
 
