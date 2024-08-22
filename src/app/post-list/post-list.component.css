@@ -1,0 +1,8 @@
+.post-list-container {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+mat-card {
+  margin-bottom: 20px;
+}
