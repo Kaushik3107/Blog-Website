@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { PostService } from '../post.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post, PostService } from '../post.service';
 
 @Component({
   selector: 'app-add-post',
@@ -10,9 +10,12 @@ import { PostService } from '../post.service';
 })
 export class AddPostComponent implements OnInit {
   postForm: FormGroup;
+  postId: number | null = null;
+  isEditMode = false;
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private postService: PostService,
     private router: Router
   ) {
@@ -23,13 +26,38 @@ export class AddPostComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Check if there's an ID in the route params
+    this.postId = +this.route.snapshot.paramMap.get('id')!;
+    if (this.postId) {
+      this.isEditMode = true;
+      // Load the existing post data
+      const post = this.postService.getPostById(this.postId);
+      if (post) {
+        this.postForm.patchValue(post);
+      }
+    }
+  }
 
   onSubmit(): void {
+    // if (this.postForm.valid) {
+    //   this.postService.addPost(this.postForm.value);
+    //   this.postForm.reset();
+    //   this.router.navigate(['/posts']); // Navigate to the post list
+    // }
     if (this.postForm.valid) {
-      this.postService.addPost(this.postForm.value);
-      this.postForm.reset();
-      this.router.navigate(['/posts']); // Navigate to the post list
+      const postData: Post = { id: this.postId ?? 0, ...this.postForm.value };
+
+      if (this.isEditMode) {
+        // Edit existing post
+        this.postService.editPost(postData);
+      } else {
+        // Add new post
+        this.postService.addPost(postData);
+      }
+
+      // Redirect to post list
+      this.router.navigate(['/posts']);
     }
   }
 }
