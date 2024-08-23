@@ -24,6 +24,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 // Services
 import { PostService } from './post.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Define the routes for your application
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatIconModule,
     MatDialogModule,
+    FontAwesomeModule,
   ],
   providers: [PostService],
   bootstrap: [AppComponent],
